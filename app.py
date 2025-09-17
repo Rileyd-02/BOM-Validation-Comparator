@@ -18,14 +18,14 @@ def find_best_match(plm_row, sap_df, threshold=80):
     Finds the best matching SAP row for a given PLM row using fuzzy matching.
     Returns the matched row, similarity score, and combined key.
     """
-    plm_key = f"{plm_row['Customer Style']}|{plm_row['Color Reference']}|{plm_row['Vendor Reference']}"
+    plm_key = f"{plm_row['Material']}|{plm_row['Color Reference']}|{plm_row['Vendor Reference']}"
     
     best_match_row = None
     best_score = 0
     
     for _, sap_row in sap_df.iterrows():
         # Corrected line to use the renamed column 'Color Reference'
-        sap_key = f"{sap_row['Customer Style']}|{sap_row['Color Reference']}|{sap_row['Vendor Reference']}"
+        sap_key = f"{sap_row['Material']}|{sap_row['Color Reference']}|{sap_row['Vendor Reference']}"
         
         # Use token set ratio for robust matching
         score = fuzz.token_set_ratio(plm_key.lower(), sap_key.lower())
